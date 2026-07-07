@@ -1,0 +1,23 @@
+DOSSIER AUDIO
+=============
+
+Ajoute ici tes fichiers audio pour personnaliser le son du site.
+Le site fonctionne parfaitement même sans ces fichiers (il ignore
+simplement le son si un fichier est absent).
+
+Fichiers attendus :
+  musique.mp3   → la musique douce jouée en fond dès qu'on clique sur
+                  "Commencer l'aventure" (idéalement une musique calme,
+                  romantique, en boucle, format mp3, quelques Mo max)
+  pop.mp3       → petit son joué quand on trouve un gâteau ou qu'on
+                  ouvre un cadeau (un "pop" court et joyeux)
+  chime.mp3     → petit son joué à l'ouverture de la boîte cadeau finale
+                  (un carillon doux)
+
+Où trouver des sons libres de droits :
+- pixabay.com/music (musique et effets sonores gratuits)
+- freesound.org
+- mixkit.co/free-sound-effects
+
+Il suffit de renommer tes fichiers exactement comme ci-dessus et de les
+déposer dans ce dossier : aucune modification de code n'est nécessaire.

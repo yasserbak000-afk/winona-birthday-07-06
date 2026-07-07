@@ -1,0 +1,26 @@
+DOSSIER IMAGES
+==============
+
+Ajoute ici tes propres photos pour qu'elles apparaissent dans la galerie
+"polaroid" (Page 6 du site).
+
+Nom des fichiers attendus :
+  photo1.jpg
+  photo2.jpg
+  photo3.jpg
+  photo4.jpg
+  photo5.jpg
+  photo6.jpg
+
+Conseils :
+- Utilise de préférence des photos carrées (ou elles seront recadrées
+  automatiquement en carré grâce au style CSS).
+- Formats acceptés : .jpg, .jpeg, .png, .webp
+  (si tu utilises un autre format ou d'autres noms de fichiers,
+   pense à modifier les chemins correspondants dans script.js,
+   section "13. SCÈNE 5 — Galerie photo façon Polaroid").
+- Si une image est manquante, un joli cadre avec une icône 📷
+  s'affichera automatiquement à la place : le site ne casse jamais.
+
+Tu peux bien sûr ajouter plus ou moins de 6 photos : il suffit d'ajouter
+ou de retirer des entrées dans le tableau "captions" du fichier script.js.

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🎂 Joyeux anniversaire Winona ❤️</title>
+<meta name="description" content="Une aventure d'anniversaire pour Winona, par Yasser">
+
+<!-- Polices Google Fonts : Playfair Display (titres) + Poppins (texte) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     CANVAS DE PARTICULES / CONFETTIS / FEUX D'ARTIFICE (plein écran)
+     ============================================================ -->
+<canvas id="fx-canvas"></canvas>
+
+<!-- ============================================================
+     ÉCRAN DE CHARGEMENT
+     ============================================================ -->
+<div id="loader">
+  <div class="loader-glow"></div>
+  <p class="loader-text">Préparation de ta surprise<span class="dots">…</span></p>
+  <div class="progress-track">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <span class="progress-percent" id="progressPercent">0%</span>
+  <button id="startBtn" class="btn btn-primary hidden">✨ Commencer l'aventure</button>
+</div>
+
+<!-- ============================================================
+     BARRE D'OUTILS FLOTTANTE (mode sombre, son, minuteur)
+     ============================================================ -->
+<div id="toolbar" class="hidden">
+  <button id="themeToggle" class="tool-btn" title="Changer de thème" aria-label="Changer de thème">🌙</button>
+  <button id="muteToggle" class="tool-btn" title="Couper la musique" aria-label="Couper la musique">🔊</button>
+  <div class="tool-timer" id="siteTimer" title="Temps passé sur le site">00:00</div>
+</div>
+
+<!-- ============================================================
+     GUIRLANDE LUMINEUSE — navigation entre les scènes (signature)
+     ============================================================ -->
+<nav id="garland" class="hidden" aria-label="Progression de l'aventure">
+  <div class="garland-wire"></div>
+  <button class="bulb" data-scene="0" aria-label="Scène 1"></button>
+  <button class="bulb" data-scene="1" aria-label="Scène 2"></button>
+  <button class="bulb" data-scene="2" aria-label="Scène 3"></button>
+  <button class="bulb" data-scene="3" aria-label="Scène 4"></button>
+  <button class="bulb" data-scene="4" aria-label="Scène 5"></button>
+  <button class="bulb" data-scene="5" aria-label="Scène 6"></button>
+  <button class="bulb" data-scene="6" aria-label="Scène 7"></button>
+</nav>
+
+<!-- ============================================================
+     APPLICATION PRINCIPALE (toutes les scènes / "pages")
+     ============================================================ -->
+<main id="app" class="hidden">
+
+  <!-- ---------- SCÈNE 0 — PAGE 1 : Introduction ---------- -->
+  <section class="scene active" id="scene-0" data-index="0">
+    <div class="scene-inner glass-panel">
+      <h1 class="mega-title" id="typewriter"></h1>
+      <div class="reveal-lines" id="revealLines">
+        <p class="reveal-line">Aujourd'hui n'est pas un jour comme les autres.</p>
+        <p class="reveal-line">Aujourd'hui, c'est toi que l'on célèbre.</p>
+        <p class="reveal-line">Alors installe-toi confortablement…</p>
+        <p class="reveal-line">Parce qu'une petite aventure t'attend. 🎁</p>
+      </div>
+      <button class="btn btn-primary next-btn" data-next="1">Continuer ✨</button>
+    </div>
+  </section>
+
+  <!-- ---------- SCÈNE 1 — PAGE 2 : Cartes statistiques ---------- -->
+  <section class="scene" id="scene-1" data-index="1">
+    <div class="scene-inner">
+      <h2 class="scene-title">Quelques statistiques officielles <span class="wiggle">📊</span></h2>
+      <div class="stat-grid">
+        <div class="stat-card glass-panel" data-tilt>
+          <span class="stat-icon">✨</span>
+          <h3>Niveau de beauté</h3>
+          <p class="stat-value" data-target="9999">0</p>
+          <span class="stat-suffix">/ 10</span>
+        </div>
+        <div class="stat-card glass-panel" data-tilt>
+          <span class="stat-icon">😊</span>
+          <h3>Bonne humeur</h3>
+          <p class="stat-value infinity">∞</p>
+        </div>
+        <div class="stat-card glass-panel" data-tilt>
+          <span class="stat-icon">❤️</span>
+          <h3>Pouvoir de faire sourire</h3>
+          <p class="stat-value illimite">Illimité</p>
+        </div>
+        <div class="stat-card glass-panel" data-tilt>
+          <span class="stat-icon">🍀</span>
+          <h3>Chance aujourd'hui</h3>
+          <p class="stat-value" data-target="100">0</p>
+          <span class="stat-suffix">%</span>
+        </div>
+      </div>
+      <button class="btn btn-primary next-btn" data-next="2">La suite t'attend →</button>
+    </div>
+  </section>
+
+  <!-- ---------- SCÈNE 2 — PAGE 3 : Mini-jeu, trouver les gâteaux ---------- -->
+  <section class="scene" id="scene-2" data-index="2">
+    <div class="scene-inner">
+      <h2 class="scene-title">Trouve les 5 gâteaux cachés 🎂</h2>
+      <p class="scene-subtitle" id="cakeMessage">Ils se cachent quelque part sur cette carte…</p>
+      <div class="game-board" id="cakeBoard"></div>
+      <p class="game-progress">Trouvés : <span id="cakeCount">0</span> / 5</p>
+      <button class="btn btn-primary next-btn hidden" id="cakeContinueBtn" data-next="3">Continuer 🎉</button>
+    </div>
+  </section>
+
+  <!-- ---------- SCÈNE 3 — PAGE 4 : Pluie de cadeaux ---------- -->
+  <section class="scene" id="scene-3" data-index="3">
+    <div class="scene-inner">
+      <h2 class="scene-title">Une pluie de cadeaux 🎁</h2>
+      <p class="scene-subtitle">Clique sur chaque cadeau pour découvrir ce qu'il contient…</p>
+      <div class="gift-grid" id="giftGrid"></div>
+      <p class="game-progress">Ouverts : <span id="giftCount">0</span> / 10</p>
+      <button class="btn btn-primary next-btn hidden" id="giftContinueBtn" data-next="4">Continuer →</button>
+    </div>
+  </section>
+
+  <!-- ---------- SCÈNE 4 — PAGE 5 : Boîte cadeau dorée + lettre ---------- -->
+  <section class="scene" id="scene-4" data-index="4">
+    <div class="scene-inner">
+      <h2 class="scene-title" id="boxTitle">Une boîte dorée t'attend…</h2>
+      <div class="gift-box-wrap" id="giftBoxWrap">
+        <div class="gift-box" id="giftBox">
+          <div class="box-lid"></div>
+          <div class="box-base"></div>
+          <div class="box-ribbon-v"></div>
+          <div class="box-ribbon-h"></div>
+          <div class="box-bow">🎀</div>
+        </div>
+        <p class="box-hint" id="boxHint">Touche la boîte pour l'ouvrir</p>
+      </div>
+
+      <div class="letter glass-panel hidden" id="letterCard">
+        <h3 class="letter-title">💌 Pour Winona</h3>
+        <div class="letter-body" id="letterBody"></div>
+      </div>
+      <button class="btn btn-primary next-btn hidden" id="letterContinueBtn" data-next="5">Découvrir la dernière surprise ✨</button>
+    </div>
+  </section>
+
+  <!-- ---------- SCÈNE 5 — PAGE 6 : Révélation nocturne + carte du monde + vrai cadeau ---------- -->
+  <section class="scene scene-night" id="scene-5" data-index="5">
+    <div class="scene-inner reveal-scene">
+
+      <!-- Phase A : ciel étoilé + texte -->
+      <div class="sky-layer" id="skyLayer"></div>
+      <div class="reveal-lines night-lines" id="skyLines">
+        <p class="reveal-line">Jusqu'à maintenant…</p>
+        <p class="reveal-line">Tu pensais que ce site était le cadeau.</p>
+        <p class="reveal-line">Mais ce n'était que le début…</p>
+      </div>
+
+      <!-- Phase B : la boîte descend du ciel -->
+      <div class="sky-box-wrap hidden" id="skyBoxWrap">
+        <div class="light-beam"></div>
+        <button class="sky-gift-box" id="skyGiftBox" aria-label="Ouvrir le vrai cadeau">🎁</button>
+        <p class="box-hint">Clique pour découvrir ton véritable cadeau.</p>
+      </div>
+
+      <!-- Phase C : carte du monde, Chine / Japon -->
+      <div class="world-map-wrap hidden" id="worldMapWrap">
+        <div class="world-map" id="worldMap">
+          <span class="globe">🌍</span>
+          <svg class="map-line" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <line x1="35" y1="58" x2="70" y2="40" />
+          </svg>
+          <div class="pin pin-china">🇨🇳<span>Chine</span></div>
+          <div class="pin pin-japan">🇯🇵<span>Japon</span></div>
+        </div>
+      </div>
+
+      <!-- Phase D : le vrai cadeau, révélé progressivement -->
+      <div class="letter glass-panel hidden" id="giftLetterCard">
+        <h3 class="letter-title">🎁 Mon véritable cadeau pour toi</h3>
+        <div class="letter-body" id="giftLetterBody"></div>
+      </div>
+
+      <button class="btn btn-primary next-btn hidden" id="adventureBtn" data-next="6">✈️ Notre première aventure commence ici</button>
+    </div>
+  </section>
+
+  <!-- ---------- SCÈNE 6 — FINALE : décollage & au revoir ---------- -->
+  <section class="scene" id="scene-6" data-index="6">
+    <div class="scene-inner finale-inner">
+      <div class="sky-clouds" id="cloudLayer"></div>
+      <div class="plane" id="plane">✈️</div>
+      <h1 class="finale-title">À bientôt, Winona ❤️</h1>
+      <p class="finale-sub2">Notre première aventure ne fait que commencer.</p>
+      <button class="btn btn-ghost" id="replayBtn">Revivre l'aventure ↻</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     ÉLÉMENTS AUDIO (facultatifs — remplace les fichiers dans /audio)
+     ============================================================ -->
+<audio id="bgMusic" loop preload="none">
+  <source src="audio/musique.mp3" type="audio/mpeg">
+</audio>
+<audio id="sfxPop" preload="none">
+  <source src="audio/pop.mp3" type="audio/mpeg">
+</audio>
+<audio id="sfxChime" preload="none">
+  <source src="audio/chime.mp3" type="audio/mpeg">
+</audio>
+
+<script src="script.js"></script>
+</body>
+</html>
